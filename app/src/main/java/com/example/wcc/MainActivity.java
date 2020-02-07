@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private androidx.appcompat.widget.Toolbar toolbar;
+
     private CollectionAdapter collectionAdapter;
     private ViewPager2 viewPager2;
     private TabLayout tabLayout;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         collectionAdapter=new CollectionAdapter(this);
         viewPager2.setAdapter(collectionAdapter);
         tabLayout =findViewById(R.id.tab_layout);
-        TabLayout.Tab Request=tabLayout.getTabAt(0);
+
         TabLayoutMediator.TabConfigurationStrategy tabConfigurationStrategy1=new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
@@ -100,7 +101,16 @@ public class MainActivity extends AppCompatActivity {
             FirebaseAuth.getInstance().signOut();
             sendToStart();
         }
+        if(item.getItemId()==R.id.main_setting)
+        {
+           sendToAccount();
+        }
         return true;
+    }
+
+    private void sendToAccount() {
+        Intent intent=new Intent(MainActivity.this,AccountSettings.class);
+        startActivity(intent);
     }
 
 }

@@ -35,7 +35,8 @@ public class LoginActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Login");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        emailInput = (EditText) findViewById(R.id.username);
+
+        emailInput= (EditText) findViewById(R.id.username);
         passwordInput = (EditText) findViewById(R.id.password);
         login=(Button) findViewById(R.id.login);
 

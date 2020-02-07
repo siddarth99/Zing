@@ -5,4 +5,7 @@
     <item
         android:id="@+id/main_logout_button"
         android:title="@string/log_out" />
+    <item
+        android:id="@+id/main_setting"
+        android:title="Account" />
 </menu>

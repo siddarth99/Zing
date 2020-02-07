@@ -9,8 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".ui.login.LoginActivity" />
+        <activity android:name=".Profile_picture"
+            android:parentActivityName=".AccountSettings" />
+        <activity android:name=".AccountSettings"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".LoginActivity"
+            android:parentActivityName=".StartActivity"/>
+
         <activity
             android:name=".RegisterActivity"
             android:parentActivityName=".StartActivity" />
