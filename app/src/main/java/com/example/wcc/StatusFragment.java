@@ -3,10 +3,8 @@ package com.example.wcc;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -16,24 +14,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
-
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Dialogue extends DialogFragment {
+public class StatusFragment extends DialogFragment {
 
-        private EditText user;
+    private EditText user;
 
-    public Dialogue() {
+
+    public StatusFragment() {
         // Required empty public constructor
     }
 
@@ -44,15 +39,15 @@ public class Dialogue extends DialogFragment {
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
-        builder.setView(inflater.inflate(R.layout.fragment_dialogue, null))
+        builder.setView(inflater.inflate(R.layout.fragment_status, null))
                 // Add action buttons
 
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         Dialog dialog1=(Dialog) dialog;
-                        user=dialog1.findViewById(R.id.edit_name_dialogue);
-                       EnterName(user);
+                        user=dialog1.findViewById(R.id.edit_status_dialogue);
+                        EnterName(user);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -73,7 +68,10 @@ public class Dialogue extends DialogFragment {
         DatabaseReference myRef = database.getReference();
         String userN;
         userN=user.getText().toString();
-        myRef.child("Users").child(uid).child("name").setValue(userN);
+        myRef.child("Users").child(uid).child("status").setValue(userN);
     }
 
 }
+
+
+

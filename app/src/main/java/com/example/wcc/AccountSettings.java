@@ -3,6 +3,8 @@ package com.example.wcc;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.media.Image;
@@ -31,6 +33,7 @@ public class AccountSettings extends AppCompatActivity {
     private EditText setting_name;
     private ImageButton edit_name;
     private ImageButton edit_image_button;
+    private ImageButton edit_status;
     private EditText setting_status;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,17 +82,27 @@ public class AccountSettings extends AppCompatActivity {
                 EditDisplayName();
             }
         });
+        edit_status=findViewById(R.id.edit_status_button);
+        edit_status.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditStatus();
+            }
+        });
 
 
 
     }
 
+    private void EditStatus() {
+        DialogFragment dialogFragment=new StatusFragment();
+        dialogFragment.show(getSupportFragmentManager(),"Edit Bio");
+    }
+
     private void EditDisplayName() {
-
-
-
-
-
+        DialogFragment dialogue=new Dialogue();
+        FragmentManager fragmentManager=getSupportFragmentManager();
+        dialogue.show(fragmentManager ,"Edit name");
 
     }
 }
