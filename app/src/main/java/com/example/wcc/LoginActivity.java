@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,8 +24,10 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText emailInput;
-    private EditText passwordInput;
+    private TextInputLayout emailInput1;
+    private TextInputLayout passwordInput1;
+    private TextInputEditText emailInput;
+    private TextInputEditText passwordInput;
     private FirebaseAuth mAuth;
     private Button login;
     private Toolbar toolbar;
@@ -38,16 +41,16 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Login");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        emailInput= (EditText) findViewById(R.id.username);
-        passwordInput = (EditText) findViewById(R.id.password);
+        emailInput1= findViewById(R.id.loginusername);
+        passwordInput1 = findViewById(R.id.loginpassword);
         login=(Button) findViewById(R.id.login);
         progressDialog=new ProgressDialog(this);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressDialog.setMessage("Logging you in!");
-                String email = emailInput.getText().toString();
-                String password = passwordInput.getText().toString();
+                String email=emailInput1.getEditText().getText().toString();
+                String password = passwordInput1.getEditText().getText().toString();
                 if (!TextUtils.isEmpty(email) || !TextUtils.isEmpty(password)) {
                     progressDialog.show();
                     Login(email, password);

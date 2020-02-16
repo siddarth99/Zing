@@ -5,56 +5,87 @@
     android:id="@+id/RegisterUserName"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffff"
+    android:background="@color/colorPrimary"
     tools:context=".RegisterActivity">
 
     <include
         android:id="@+id/registerToolbar"
         layout="@layout/app_bar" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/RegisterEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="310dp"
+        android:layout_height="50dp"
         android:layout_marginTop="40dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
+        android:textColorHint="@color/colorPrimaryLight"
+        app:boxBackgroundColor="@color/colorSecondary"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/colorSecondary"
+        app:boxStrokeWidth="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RegisterUser" />
+        app:layout_constraintTop_toBottomOf="@+id/RegisterUser">
 
-    <EditText
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nRegisterEmail"
+            android:layout_width="310dp"
+            android:layout_height="50dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/RegisterPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="310dp"
+        android:layout_height="50dp"
         android:layout_marginTop="40dp"
         android:ems="10"
+        android:focusable="auto"
         android:hint="Password"
         android:inputType="textPassword"
+        android:textColorHint="@color/colorPrimaryLight"
+        app:boxBackgroundColor="@color/colorSecondary"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="@color/colorSecondary"
+        app:boxStrokeWidth="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RegisterEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/RegisterEmail"
+        app:passwordToggleEnabled="true">
 
-    <EditText
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/NRegisterPassword"
+            android:layout_width="310dp"
+            android:layout_height="50dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/RegisterUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="310dp"
+        android:layout_height="54dp"
         android:layout_marginTop="44dp"
-        android:ems="10"
+        android:cursorVisible="true"
         android:hint="User name"
         android:inputType="textPersonName"
+        android:textColorHint="@color/colorPrimaryLight"
+        app:boxStrokeColor="@color/colorSecondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nRegisterUser"
+            android:layout_width="310dp"
+            android:layout_height="50dp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/CreateAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="148dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="45dp"
-        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
-        android:backgroundTint="#F10743"
+        android:background="@color/colorSecondaryDark"
         android:text="Create Account"
         android:textColor="#ffff"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -71,7 +102,8 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="40dp"
         android:text="CREATE A NEW ACCOUNT!"
-        android:textSize="18sp"
+        android:textColor="@color/colorAccent"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerToolbar" />

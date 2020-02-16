@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,9 +29,9 @@ import java.util.EmptyStackException;
 import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
-    private EditText UserName;
-    private EditText Email;
-    private EditText Password;
+    private TextInputLayout UserName;
+    private TextInputLayout Email;
+    private TextInputLayout Password;
     private Button CreateAcc;
     private FirebaseAuth mAuth;
     private Toolbar toolbar;
@@ -49,9 +50,9 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-        UserName=(EditText) findViewById(R.id.RegisterUser);
-        Email=(EditText)findViewById(R.id.RegisterEmail);
-        Password=(EditText)findViewById(R.id.RegisterPassword);
+        UserName=findViewById(R.id.RegisterUser);
+        Email=findViewById(R.id.RegisterEmail);
+        Password=findViewById(R.id.RegisterPassword);
         CreateAcc=(Button)findViewById(R.id.CreateAccount);
 
         progressBar=new ProgressDialog(this);
@@ -60,9 +61,9 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 progressBar.setMessage("Please wait while you are being registered");
 
-                String userN = UserName.getText().toString();
-                String email = Email.getText().toString();
-                String password = Password.getText().toString();
+                String userN = UserName.getEditText().getText().toString();
+                String email = Email.getEditText().getText().toString();
+                String password = Password.getEditText().getText().toString();
                 if (!TextUtils.isEmpty(userN) || !TextUtils.isEmpty(email) || !TextUtils.isEmpty(password)) {
                     progressBar.show();
                     RegisterUsers(userN, email, password);
