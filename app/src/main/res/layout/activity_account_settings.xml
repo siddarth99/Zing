@@ -31,23 +31,25 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="100dp"
         android:layout_marginTop="108dp"
         android:text="User Name"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_image" />
 
-    <EditText
+    <TextView
         android:id="@+id/setting_name"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
+        android:layout_width="182dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="100dp"
         android:minWidth="180dp"
-        android:minHeight="20dp"
+        android:minHeight="30dp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.393"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -79,24 +81,26 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="100dp"
         android:layout_marginTop="56dp"
         android:text="Bio"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.122"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/setting_name" />
 
-    <EditText
+    <TextView
         android:id="@+id/setting_status"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:minWidth="180dp"
-        android:minHeight="20dp"
+        android:layout_width="182dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="100dp"
         android:inputType="textMultiLine"
+        android:minWidth="180dp"
+        android:minHeight="30dp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.393"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -108,7 +112,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/setting_status"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/setting_name"
+        app:layout_constraintStart_toEndOf="@+id/setting_status"
         app:layout_constraintTop_toTopOf="@+id/setting_status"
         app:srcCompat="@drawable/ic_action_name" />
 
