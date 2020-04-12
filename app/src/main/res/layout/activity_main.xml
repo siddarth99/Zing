@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/main_page_toolbar"
             android:layout_marginTop="0dp"
-            android:background="#9C27B0" />
+            android:background="@color/colorPrimaryDark" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager2.widget.ViewPager2

@@ -27,37 +27,43 @@
         android:id="@+id/start_create_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorSecondaryDark"
+        android:background="@drawable/buttonshape"
         android:text="  CREATE NEW ACCOUNT  "
         android:textColor="#ffffff"
+        android:textSize="14sp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.206" />
+        app:layout_constraintVertical_bias="0.206"
+         />
 
     <Button
         android:id="@+id/start_login1"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="188dp"
-        android:layout_marginBottom="30dp"
-        android:background="@color/colorPrimary"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/buttonshape"
         android:text="Log in"
         android:textColor="@color/colorSecondaryDark"
+        android:textSize="16dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.845"
+        app:layout_constraintHorizontal_bias="0.854"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/start_create_button"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.905" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="205dp"
-        android:layout_height="38dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="17dp"
         android:text="Have an account already?"
         android:textColor="@color/colorAccent"
         android:textSize="16dp"

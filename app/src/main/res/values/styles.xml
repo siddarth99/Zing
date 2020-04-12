@@ -9,12 +9,10 @@
         <item name="colorSecondaryVariant">@color/colorSecondaryDark</item>
         <item name="colorSecondary">@color/colorPrimaryDark</item>
         <item name="colorOnSecondary">@color/colorSecondaryLight</item>
-
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-    <style name="Boxcolor" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="boxStrokeColor">@color/colorSecondary</item>
         <item name="boxStrokeWidth">2dp</item>
-        </style>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
 
 </resources>

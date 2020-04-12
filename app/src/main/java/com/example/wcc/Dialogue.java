@@ -18,6 +18,7 @@ import android.widget.EditText;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +32,7 @@ import java.util.HashMap;
  */
 public class Dialogue extends DialogFragment {
 
-        private EditText user;
+        private TextInputLayout user;
 
     public Dialogue() {
         // Required empty public constructor
@@ -52,7 +53,7 @@ public class Dialogue extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         Dialog dialog1=(Dialog) dialog;
                         user=dialog1.findViewById(R.id.edit_name_dialogue);
-                       EnterName(user);
+                       EnterName(user.getEditText());
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

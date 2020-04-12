@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
-        if(item.getItemId()==R.id.main_logout_button)
+      /*  if(item.getItemId()==R.id.main_logout_button)
         {
             FirebaseAuth.getInstance().signOut();
             sendToStart();
@@ -104,7 +104,23 @@ public class MainActivity extends AppCompatActivity {
         if(item.getItemId()==R.id.main_setting)
         {
            sendToAccount();
-        }
+        }*/
+
+      switch (item.getItemId())
+      {
+          case R.id.main_logout_button:
+              FirebaseAuth.getInstance().signOut();
+              sendToStart();
+              break;
+          case R.id.main_all_users:
+              Intent intent=new Intent(MainActivity.this,AllUsersActivity.class);
+              startActivity(intent);
+
+              break;
+          case R.id.main_setting:
+              sendToAccount();
+              break;
+      }
         return true;
     }
 
@@ -112,5 +128,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent=new Intent(MainActivity.this,AccountSettings.class);
         startActivity(intent);
     }
+
 
 }

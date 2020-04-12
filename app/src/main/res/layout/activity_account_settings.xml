@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#9C27B0"
+    android:background="@color/colorPrimary"
     tools:context=".AccountSettings">
 
     <include
@@ -19,7 +19,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="112dp"
-        android:src="@drawable/profile_pic"
+        android:src="@drawable/ic_person_24px"
         app:civ_border_color="#FF000000"
         app:civ_border_width="2dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,47 +27,52 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView2"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/setting_name"
+        style="@style/AppTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="108dp"
-        android:text="User Name"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_image" />
+        android:layout_marginStart="80dp"
 
-    <TextView
-        android:id="@+id/setting_name"
-        android:layout_width="182dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="100dp"
-        android:minWidth="180dp"
-        android:minHeight="30dp"
-        android:textSize="18sp"
+        android:layout_marginTop="88dp"
+        android:ems="10"
+        android:hint="User name"
+        android:editable="false"
+        android:focusable="false"
+        android:textColorHint="@color/colorPrimaryLight"
+        app:boxBackgroundColor="@color/colorSecondary"
+        app:boxBackgroundMode="outline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
+
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_image">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:focusable="false"
+            android:editable="false"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <ImageButton
         android:id="@+id/edit_name_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#9C27B0"
+        android:backgroundTint="@color/colorSecondaryDark"
+        app:layout_constraintBottom_toBottomOf="@+id/setting_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/setting_name"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@+id/setting_name"
         app:srcCompat="@drawable/ic_action_name" />
 
     <ImageButton
         android:id="@+id/edit_image_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorSecondaryDark"
         app:layout_constraintBottom_toBottomOf="@+id/profile_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.437"
@@ -77,38 +82,40 @@
         app:srcCompat="@drawable/ic_action_name" />
 
 
-    <TextView
-        android:id="@+id/textView3"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/setting_status"
+        style="@style/AppTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="56dp"
-        android:text="Bio"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setting_name" />
+        android:layout_marginStart="80dp"
 
-    <TextView
-        android:id="@+id/setting_status"
-        android:layout_width="182dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="100dp"
-        android:inputType="textMultiLine"
-        android:minWidth="180dp"
-        android:minHeight="30dp"
-        android:textSize="18sp"
+        android:ems="10"
+        android:hint="Status"
+        android:editable="false"
+        android:focusable="false"
+        android:inputType="textEmailAddress"
+        android:textColorHint="@color/colorPrimaryLight"
+        app:boxBackgroundColor="@color/colorSecondary"
+        app:boxBackgroundMode="outline"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/setting_name"
+        app:layout_constraintVertical_bias="0.313">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:editable="false"
+            android:focusable="false"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <ImageButton
         android:id="@+id/edit_status_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#9C27B0"
+        android:backgroundTint="@color/colorSecondaryDark"
         app:layout_constraintBottom_toBottomOf="@+id/setting_status"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

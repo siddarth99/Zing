@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -25,7 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
  */
 public class StatusFragment extends DialogFragment {
 
-    private EditText user;
+    private TextInputLayout user;
 
 
     public StatusFragment() {
@@ -47,7 +48,7 @@ public class StatusFragment extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         Dialog dialog1=(Dialog) dialog;
                         user=dialog1.findViewById(R.id.edit_status_dialogue);
-                        EnterName(user);
+                        EnterName(user.getEditText());
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

@@ -25,6 +25,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -45,11 +46,11 @@ import java.util.HashMap;
 public class AccountSettings extends AppCompatActivity {
     private ImageView imageView;
     private Toolbar toolbar;
-    private TextView setting_name;
+    private TextInputLayout setting_name;
     private ImageButton edit_name;
     private ImageButton edit_image_button;
     private ImageButton edit_status;
-    private TextView setting_status;
+    private TextInputLayout setting_status;
     private StorageReference mStorageRef;
     private static final int Gallery=1;
     private ProgressDialog progressDialog;
@@ -90,8 +91,8 @@ public class AccountSettings extends AppCompatActivity {
                 String status=dataSnapshot.child("status").getValue().toString();
                 image=dataSnapshot.child("image").getValue().toString();
                 String thumb=dataSnapshot.child("thumb").getValue().toString();
-                setting_name.setText(name);
-                setting_status.setText(status);
+                setting_name.getEditText().setText(name);
+                setting_status.getEditText().setText(status);
                 Picasso.get().load(image).into(imageView);
             }
 
