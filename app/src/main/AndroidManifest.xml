@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.wcc">
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,18 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ChatActivity"></activity>
         <activity
             android:name=".Profile_picture"
             android:parentActivityName=".AccountSettings" />
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat"/>
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
         <activity
             android:name=".AccountSettings"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".AllUsersActivity"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".UserProfileActivity"
-            android:parentActivityName=".AllUsersActivity"/>
+        <activity
+            android:name=".AllUsersActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".UserProfileActivity"
+            android:parentActivityName=".AllUsersActivity" />
         <activity
             android:name=".LoginActivity"
             android:parentActivityName=".StartActivity" />

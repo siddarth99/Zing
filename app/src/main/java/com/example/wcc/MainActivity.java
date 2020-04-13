@@ -6,6 +6,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.widget.ToolbarWidgetWrapper;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager2.setAdapter(collectionAdapter);
         tabLayout =findViewById(R.id.tab_layout);
 
+
         TabLayoutMediator.TabConfigurationStrategy tabConfigurationStrategy1=new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
@@ -62,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
         };
         new TabLayoutMediator(tabLayout,viewPager2,tabConfigurationStrategy1).attach();
 
-
     }
 
     @Override
@@ -77,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         else{
             String welcome="Welcome ";
             Toast.makeText(MainActivity.this,welcome,Toast.LENGTH_LONG);
+
         }
     }
 
