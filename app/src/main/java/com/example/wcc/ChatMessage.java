@@ -12,7 +12,6 @@ public class ChatMessage {
     public ChatMessage(String Text,String uid,String user,Date date,String thumb){
         this.date=date;
         this.Text=Text;
-        this.uid=uid;
         this.user=user;
         this.thumb=thumb;
         }

@@ -5,9 +5,10 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="Zing"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".ApplicationClass"
         android:theme="@style/AppTheme">
         <activity android:name=".ChatActivity"></activity>
         <activity
@@ -24,10 +25,22 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".UserProfileActivity"
-            android:parentActivityName=".AllUsersActivity" />
+            android:parentActivityName=".AllUsersActivity">
+            <intent-filter>
+                <action android:name="FriendReqTarget"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                </intent-filter>
+        </activity>
         <activity
             android:name=".LoginActivity"
             android:parentActivityName=".StartActivity" />
+        <service android:name=".NotificationsActivity"
+            android:exported="false">
+          <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+          </intent-filter>
+        </service>
         <activity
             android:name=".RegisterActivity"
             android:parentActivityName=".StartActivity" />

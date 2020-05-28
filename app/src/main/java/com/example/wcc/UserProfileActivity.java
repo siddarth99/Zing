@@ -62,8 +62,6 @@ public class UserProfileActivity extends AppCompatActivity {
 
             final String user_id = getIntent().getStringExtra("uid");
 
-
-
             mRootRef = FirebaseDatabase.getInstance().getReference();
 
             mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id);
@@ -351,20 +349,11 @@ public class UserProfileActivity extends AppCompatActivity {
 
 
                                 }
-
                                 mProfileSendReqBtn.setEnabled(true);
-
                             }
                         });
-
                     }
-
-
                 }
             });
-
-
         }
-
-
     }

@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -46,8 +47,8 @@ public class ChatFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View rootView= inflater.inflate(R.layout.fragment_chat, container, false);
-        chats=FirebaseDatabase.getInstance().getReference().child("messages");
-        query=FirebaseDatabase.getInstance().getReference().child("messages");
+        chats=FirebaseDatabase.getInstance().getReference().child("Chats");
+        query=FirebaseDatabase.getInstance().getReference().child("Chats").child(FirebaseAuth.getInstance().getUid()).limitToLast(50);
         recyclerView=rootView.findViewById(R.id.MainChatRecycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -86,9 +87,15 @@ public class ChatFragment extends Fragment {
             @NonNull
             @Override
             public ChatViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return null;
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.main_page_mini_user, parent, false);
+
+                return new ChatViewHolder(view);
+
             }
         };
+        firebaseRecyclerAdapter.startListening();
+        recyclerView.setAdapter(firebaseRecyclerAdapter);
     }
 
     private static class ChatViewHolder extends RecyclerView.ViewHolder{

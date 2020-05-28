@@ -99,10 +99,8 @@ public class AccountSettings extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(AccountSettings.this,"Error!! please try again",Toast.LENGTH_SHORT);
-
             }
         });
-
 
         edit_name=findViewById(R.id.edit_name_button);
         edit_name.setOnClickListener(new View.OnClickListener() {

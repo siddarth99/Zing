@@ -16,9 +16,12 @@ import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -28,6 +31,8 @@ public class AllUsersActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private DatabaseReference firebaseDatabase;
+
+
 
     private Query query;
     @Override
@@ -43,7 +48,6 @@ public class AllUsersActivity extends AppCompatActivity {
 
         recyclerView=findViewById(R.id.recycleUsers);
         recyclerView.setHasFixedSize(true);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
@@ -61,14 +65,13 @@ public class AllUsersActivity extends AppCompatActivity {
                 holder.setBio(model.getStatus());
                 holder.setThumb(model.getThumb());
                 final String uid=getRef(position).getKey();
+
                 holder.mview.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent=new Intent(AllUsersActivity.this,UserProfileActivity.class);
                         intent.putExtra("uid",uid);
                         startActivity(intent);
-
-
                     }
                 });
             }
