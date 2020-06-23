@@ -27,7 +27,6 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -78,6 +77,9 @@ public class RequestsFragment extends Fragment {
                         String name= dataSnapshot.child("name").getValue().toString();
                         String thumb= dataSnapshot.child("thumb").getValue().toString();
                         String status=dataSnapshot.child("status").getValue().toString();
+                        String online;
+                        if(dataSnapshot.hasChild("online"))
+                            online=dataSnapshot.child("online").getValue().toString();
                         holder.setName(name);
                         holder.setThumb(thumb);
                         holder.setBio(status);
@@ -91,12 +93,14 @@ public class RequestsFragment extends Fragment {
                 holder.mview.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent=new Intent(friend_view.getContext(),UserProfileActivity.class);
+
+                        Intent intent=new Intent(friend_view.getContext(),ChatActivity.class);
                         intent.putExtra("uid",uid);
                         startActivity(intent);
                     }
                 });
             }
+
 
             @NonNull
             @Override

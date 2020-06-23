@@ -28,7 +28,7 @@ import java.util.Map;
 
 public class UserProfileActivity extends AppCompatActivity {
     private ImageView mProfileImage;
-    private TextView mProfileName, mProfileStatus, mProfileFriendsCount;
+    private TextView mProfileName, mProfileStatus;
     private Button mProfileSendReqBtn, mDeclineBtn;
 
 
@@ -73,7 +73,6 @@ public class UserProfileActivity extends AppCompatActivity {
             mProfileImage = (ImageView) findViewById(R.id.profile_image);
             mProfileName = (TextView) findViewById(R.id.profile_displayName);
             mProfileStatus = (TextView) findViewById(R.id.profile_status);
-            mProfileFriendsCount = (TextView) findViewById(R.id.profile_totalFriends);
             mProfileSendReqBtn = (Button) findViewById(R.id.profile_send_req_btn);
             mDeclineBtn = (Button) findViewById(R.id.profile_decline_btn);
 
@@ -158,7 +157,7 @@ public class UserProfileActivity extends AppCompatActivity {
                                         if(dataSnapshot.hasChild(user_id)){
 
                                             mCurrent_state = "friends";
-                                            mProfileSendReqBtn.setText("Unfriend");
+                                            mProfileSendReqBtn.setText(" Unfriend ");
 
                                             mDeclineBtn.setVisibility(View.INVISIBLE);
                                             mDeclineBtn.setEnabled(false);
@@ -238,7 +237,6 @@ public class UserProfileActivity extends AppCompatActivity {
                                 }
 
                                 mProfileSendReqBtn.setEnabled(true);
-
 
                             }
                         });

@@ -21,6 +21,9 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private CollectionAdapter collectionAdapter;
     private ViewPager2 viewPager2;
     private TabLayout tabLayout;
+    private DatabaseReference user_ref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar=(Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Fire chat");
-
+        user_ref= FirebaseDatabase.getInstance().getReference().child(mAuth.getCurrentUser().getUid());
         viewPager2=findViewById(R.id.pager);
         collectionAdapter=new CollectionAdapter(this);
         viewPager2.setAdapter(collectionAdapter);
@@ -79,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         else{
             String welcome="Welcome ";
             Toast.makeText(MainActivity.this,welcome,Toast.LENGTH_LONG);
+            user_ref.child("online").setValue(true);
 
         }
     }
@@ -88,6 +93,17 @@ public class MainActivity extends AppCompatActivity {
         startActivity(startIntent);
         finish();
     }
+
+    @Override
+
+    protected void onStop() {
+        super.onStop();
+        FirebaseUser currentUsers=mAuth.getCurrentUser();
+        if(currentUsers!=null)
+            user_ref.child("online").setValue(ServerValue.TIMESTAMP);
+
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -115,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
               FirebaseAuth.getInstance().signOut();
               sendToStart();
               break;
+
           case R.id.main_all_users:
               Intent intent=new Intent(MainActivity.this,AllUsersActivity.class);
               startActivity(intent);
@@ -122,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
               break;
           case R.id.main_setting:
               sendToAccount();
+
               break;
       }
         return true;

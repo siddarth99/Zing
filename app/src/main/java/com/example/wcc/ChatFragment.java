@@ -7,7 +7,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -116,7 +115,7 @@ public class ChatFragment extends Fragment {
         }
 
         public void setThumb(String thumb) {
-            CircleImageView civ=mview.findViewById(R.id.profile_pic_main_page);
+            CircleImageView civ=mview.findViewById(R.id.profile_pic_chat_convo_page);
             Picasso.get().load(thumb).placeholder(R.drawable.ic_person_24px).into(civ);
 
         }
