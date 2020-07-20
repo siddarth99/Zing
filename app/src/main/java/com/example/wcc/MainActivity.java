@@ -33,22 +33,23 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager2 viewPager2;
     private TabLayout tabLayout;
     private DatabaseReference user_ref;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mAuth = FirebaseAuth.getInstance();
+        firebaseUser  = mAuth.getCurrentUser();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         toolbar=(Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Fire chat");
-        user_ref= FirebaseDatabase.getInstance().getReference().child(mAuth.getCurrentUser().getUid());
+
         viewPager2=findViewById(R.id.pager);
         collectionAdapter=new CollectionAdapter(this);
         viewPager2.setAdapter(collectionAdapter);
         tabLayout =findViewById(R.id.tab_layout);
-
 
         TabLayoutMediator.TabConfigurationStrategy tabConfigurationStrategy1=new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
@@ -83,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         else{
             String welcome="Welcome ";
             Toast.makeText(MainActivity.this,welcome,Toast.LENGTH_LONG);
+            user_ref= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
             user_ref.child("online").setValue(true);
 
         }
@@ -101,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser currentUsers=mAuth.getCurrentUser();
         if(currentUsers!=null)
             user_ref.child("online").setValue(ServerValue.TIMESTAMP);
-
     }
 
 

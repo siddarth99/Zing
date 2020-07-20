@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:name=".ApplicationClass"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChatActivity"></activity>
         <activity
             android:name=".Profile_picture"
             android:parentActivityName=".AccountSettings" />
@@ -52,6 +51,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ChatActivity"
+            android:parentActivityName=".MainActivity" />
+
+
     </application>
 
 </manifest>
