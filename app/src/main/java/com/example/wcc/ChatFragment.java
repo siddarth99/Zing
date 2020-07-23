@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -116,7 +117,7 @@ public class ChatFragment extends Fragment {
 
         public void setThumb(String thumb) {
             CircleImageView civ=mview.findViewById(R.id.profile_pic_chat_convo_page);
-            Picasso.get().load(thumb).placeholder(R.drawable.ic_person_24px).into(civ);
+            Picasso.get().load(thumb).networkPolicy(NetworkPolicy.OFFLINE).placeholder(R.drawable.ic_person_24px).into(civ);
 
         }
     }

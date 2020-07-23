@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chatboxlayouts"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/chatLinear1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:gravity="right"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/Chatbubble1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/chatbubbledraw1"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorPrimaryLight"
+            android:gravity="right"
+            android:inputType="textMultiLine|text"
+            android:paddingLeft="12dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="50dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="10dp"
+            android:text="hey tehere ">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/message_time1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginEnd="10dp"
+            android:gravity="right"
+            android:textSize="12sp" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

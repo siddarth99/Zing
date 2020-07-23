@@ -8,8 +8,11 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -17,6 +20,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,8 +31,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -45,14 +55,19 @@ public class ChatActivity extends AppCompatActivity {
     private String user_name1;
     private FirebaseAuth auth;
     private CircleImageView profile_pic;
+    private AppCompatButton image_button;
     private String image;
+    private StorageReference mStorageRef;
     private String current_user;
+    private String reciever;
+    private String key;
     private AppCompatButton send_button;
     private String message;
     private RecyclerView chat_recycle;
     private final List<Messages> messagesList = new ArrayList<>();
     private LinearLayoutManager linearLayoutManager;
     private MessageAdapter messageAdapter;
+
     private DatabaseReference messageDatabase;
 
     @Override
@@ -68,9 +83,11 @@ public class ChatActivity extends AppCompatActivity {
         LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View action = layoutInflater.inflate(R.layout.chat_app_bar, null);
         actionBar.setCustomView(action);
+        mStorageRef = FirebaseStorage.getInstance().getReference();
         last_seen = findViewById(R.id.last_seen);
         send_message = findViewById(R.id.send_chat);
         send_button = findViewById(R.id.send_chat_button);
+        image_button = findViewById(R.id.image_button);
 
         messageAdapter =new MessageAdapter(messagesList);
 
@@ -84,6 +101,7 @@ public class ChatActivity extends AppCompatActivity {
         current_user = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
 
         final String chat_reciever = getIntent().getStringExtra("uid");
+        reciever = chat_reciever;
         loadmessage(chat_reciever);
         profile_pic = findViewById(R.id.profile_pic_chat_convo_page);
         user_name = findViewById(R.id.chat_name);
@@ -161,16 +179,30 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
+        image_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    Intent gallery_intent = new Intent();
+                    gallery_intent.setType("image/*");
+                    gallery_intent.setAction(Intent.ACTION_GET_CONTENT);
+                    startActivityForResult(Intent.createChooser(gallery_intent , "SELECT IMAGE"),1);
+            }
+        });
     }
 
+
     private void loadmessage(String chat_reciever) {
-        root.child("messages").child(current_user).child(chat_reciever).addChildEventListener(new ChildEventListener() {
+        DatabaseReference messageReference = root.child("messages").child(current_user).child(chat_reciever);
+        messageReference.addChildEventListener(new ChildEventListener() {
             @Override
+
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Messages message = dataSnapshot.getValue(Messages.class);
-
+                key = dataSnapshot.getKey();
                 messagesList.add(message);
                 messageAdapter.notifyDataSetChanged();
+                chat_recycle.scrollToPosition(messagesList.size()-1);
+
             }
 
             @Override
@@ -195,6 +227,55 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1 && resultCode == RESULT_OK){
+            Uri image_uri = data.getData();
+
+            final String current_user_ref = "messages/" + current_user + "/" + reciever;
+            final String chat_user_ref = "messages/" + reciever + "/" + current_user;
+
+            DatabaseReference user_message_push = root.child("messages").child(current_user).child(reciever).push();
+            final String push_id = user_message_push.getKey();
+            final StorageReference filepath = mStorageRef.child("message_images").child(push_id + ".jpg");
+            filepath.putFile(image_uri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    if(task.isSuccessful()){
+                        filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Map messageMap = new HashMap();
+                                messageMap.put("message" ,uri.toString());
+                                messageMap.put("seen" , false);
+                                messageMap.put("type" , "image");
+                                messageMap.put("time" ,ServerValue.TIMESTAMP);
+                                messageMap.put("from",current_user);
+
+                                Map userMap = new HashMap();
+                                userMap.put(current_user_ref +"/" + push_id, messageMap);
+                                userMap.put(chat_user_ref + "/" + push_id , messageMap);
+
+
+                                root.updateChildren(userMap, new DatabaseReference.CompletionListener() {
+                                    @Override
+                                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                                        if(databaseError != null)
+                                        {
+
+                                        }
+                                    }
+                                });
+                            }
+                        });
+
+                    }
+                }
+            });
+        }
+    }
+
     private void send_Message(String chat_reciever) {
         message = send_message.getEditText().getText().toString();
         if(!TextUtils.isEmpty(message))
@@ -208,7 +289,7 @@ public class ChatActivity extends AppCompatActivity {
             messageMap.put("seen" , false);
             messageMap.put("type" , "text");
             messageMap.put("time" ,ServerValue.TIMESTAMP);
-            messageMap.put("from",chat_reciever);
+            messageMap.put("from",current_user);
 
             Map userMap = new HashMap();
             userMap.put(current_user_ref +"/" + push_id, messageMap);
@@ -223,6 +304,7 @@ public class ChatActivity extends AppCompatActivity {
                     }
                 }
             });
+            send_message.getEditText().getText().clear();
         }
     }
 }

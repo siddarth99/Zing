@@ -1,53 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/chatboxlayout"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="2dp"
+    android:orientation="vertical"
+    android:padding="1dp">
 
 
-    <TextView
-
-        android:id="@+id/Chatbubble"
+    <RelativeLayout
+        android:id="@+id/chatLinear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="80dp"
-        android:layout_weight="1"
-        android:background="@drawable/chatbubbledraw"
+        android:layout_alignParentEnd="false"
         android:backgroundTint="@color/colorPrimaryLight"
-        android:gravity="start"
-        android:inputType="textMultiLine|text"
-        android:paddingLeft="12dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="50dp"
-        android:paddingRight="8dp"
-        android:paddingBottom="10dp"
-        android:text="hey tehere "
-        android:textAlignment="textStart"
-        app:layout_constrainedWidth="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.03"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        android:minWidth="80dp">
 
-    </TextView>
-
-    <TextView
-        android:id="@+id/message_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginEnd="8dp"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/Chatbubble"
-        app:layout_constraintEnd_toEndOf="@+id/Chatbubble"
-        app:layout_constraintTop_toTopOf="@+id/Chatbubble"
-        app:layout_constraintVertical_bias="1.0" />
+        <ImageView
+            android:id="@+id/ImageView_image"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:cropToPadding="true"
+            android:maxWidth="300dp"
+            android:maxHeight="400dp"
+            android:padding="5dp"
+            android:scaleType="centerCrop" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/Chatbubble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="false"
+            android:layout_centerVertical="false"
+            android:layout_marginEnd="0dp"
+
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorPrimaryLight"
+            android:inputType="textMultiLine|text"
+            android:maxWidth="300dp"
+            android:minWidth="80dp"
+            android:paddingLeft="12dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="30dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="15dp"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/message_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@id/Chatbubble"
+            android:layout_alignBottom="@id/Chatbubble"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentBottom="false"
+            android:layout_gravity="right"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="2dp"
+            android:gravity="right"
+            android:text="11:15"
+            android:textColor="#D3FFFFFF"
+            android:textColorLink="@color/colorAccent"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/message_image_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@id/ImageView_image"
+            android:layout_alignBottom="@id/ImageView_image"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentBottom="false"
+            android:layout_gravity="right"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="2dp"
+            android:gravity="right"
+            android:text="11:15"
+            android:textColor="#D3FFFFFF"
+            android:textColorLink="@color/colorAccent"
+            android:textSize="10sp" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

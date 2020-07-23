@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -111,6 +112,7 @@ public class AllUsersActivity extends AppCompatActivity {
 
         public void setThumb(String thumb) {
             CircleImageView civ=mview.findViewById(R.id.profile_pic);
+            Log.d("Thumb",thumb);
             Picasso.get().load(thumb).placeholder(R.drawable.ic_person_24px).into(civ);
 
         }
