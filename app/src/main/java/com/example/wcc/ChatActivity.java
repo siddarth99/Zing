@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -54,11 +55,13 @@ public class ChatActivity extends AppCompatActivity {
     private TextInputLayout send_message;
     private String user_name1;
     private FirebaseAuth auth;
+    private DatabaseReference reference;
     private CircleImageView profile_pic;
     private AppCompatButton image_button;
     private String image;
     private StorageReference mStorageRef;
     private String current_user;
+    private ValueEventListener seenListener;
     private String reciever;
     private String key;
     private AppCompatButton send_button;
@@ -144,11 +147,11 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-
+        seenMessage(current_user,chat_reciever);
         root.child("Chats").child(current_user).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (!dataSnapshot.hasChild(chat_reciever)) {
+                if (!( dataSnapshot.hasChild(chat_reciever))) {
                     Map chatMap = new HashMap();
                     chatMap.put("seen", false);
                     chatMap.put("timestamp", ServerValue.TIMESTAMP);
@@ -164,6 +167,7 @@ public class ChatActivity extends AppCompatActivity {
                         }
                     });
                 }
+
             }
 
             @Override
@@ -188,6 +192,8 @@ public class ChatActivity extends AppCompatActivity {
                     startActivityForResult(Intent.createChooser(gallery_intent , "SELECT IMAGE"),1);
             }
         });
+
+
     }
 
 
@@ -195,14 +201,12 @@ public class ChatActivity extends AppCompatActivity {
         DatabaseReference messageReference = root.child("messages").child(current_user).child(chat_reciever);
         messageReference.addChildEventListener(new ChildEventListener() {
             @Override
-
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Messages message = dataSnapshot.getValue(Messages.class);
                 key = dataSnapshot.getKey();
                 messagesList.add(message);
                 messageAdapter.notifyDataSetChanged();
                 chat_recycle.scrollToPosition(messagesList.size()-1);
-
             }
 
             @Override
@@ -276,13 +280,63 @@ public class ChatActivity extends AppCompatActivity {
         }
     }
 
-    private void send_Message(String chat_reciever) {
+    private void seenMessage(String current_user, final String chat_receiver) {
+
+        final DatabaseReference chatReference = FirebaseDatabase.getInstance().getReference("messages").child(chat_receiver).child(current_user);
+        reference = chatReference;
+        final String current = current_user;
+        Log.d("heee", "hee");
+        seenListener = chatReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    Log.d("pushva", data.getKey());
+                        Messages messages = data.getValue(Messages.class);
+                        if (messages.getFrom().equals(chat_receiver)){
+                            Map mess = new HashMap();
+                            mess.put("seen", true);
+                            data.getRef().updateChildren(mess);
+                        }
+                    }
+                }
+
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        reference.removeEventListener(seenListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        reference.removeEventListener(seenListener);
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        reference.removeEventListener(seenListener);
+    }
+
+
+
+    private void send_Message(String chat_receiver) {
         message = send_message.getEditText().getText().toString();
         if(!TextUtils.isEmpty(message))
         {
-            String current_user_ref = "messages/" + current_user + "/" + chat_reciever;
-            String chat_user_ref = "messages/" + chat_reciever + "/" + current_user;
-            DatabaseReference user_push = root.child("messages").child(current_user).child(chat_reciever).push();
+            String current_user_ref = "messages/" + current_user + "/" + chat_receiver;
+            String chat_user_ref = "messages/" + chat_receiver + "/" + current_user;
+            DatabaseReference user_push = root.child("messages").child(current_user).child(chat_receiver).push();
             String push_id = user_push.getKey();
             Map messageMap = new HashMap();
             messageMap.put("message" ,message);
@@ -294,7 +348,7 @@ public class ChatActivity extends AppCompatActivity {
             Map userMap = new HashMap();
             userMap.put(current_user_ref +"/" + push_id, messageMap);
             userMap.put(chat_user_ref + "/" + push_id , messageMap);
-
+            Log.d("push",push_id);
             root.updateChildren(userMap, new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {

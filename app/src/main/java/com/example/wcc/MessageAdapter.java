@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -94,12 +95,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             holder.time.setText(Long.toString(m.getTime()));
         }
         else{
+
             holder.imageView.setVisibility(View.VISIBLE);
             holder.messageText.setVisibility(View.INVISIBLE);
             holder.time.setVisibility(View.INVISIBLE);
 
             Log.d("Message image url", m.getMessage());
-            Picasso.get().load(m.getMessage()).networkPolicy(NetworkPolicy.OFFLINE).placeholder(R.drawable.ic_person_24px).into(holder.imageView);
+            Picasso.get().load(m.getMessage()).placeholder(R.drawable.ic_insert_photo_24px).into(holder.imageView);
             if (from_user.equals(current_user)) {
                 holder.chat_box_layout.setBackgroundResource(R.drawable.imagebubble2);
                 holder.image_time.setText(Long.toString(m.getTime()));
@@ -108,6 +110,18 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                 holder.chat_box_layout.setLayoutParams(holder.params1);
                 holder.image_time.setText(Long.toString(m.getTime()));
                 holder.chat_box_layout.setBackgroundResource(R.drawable.imagebubbledraw);
+            }
+        }
+        if(position == message_list.size()-1){
+            Log.d("seen","inside seen");
+            if(m.getSeen()){
+                if(m.getType().equals("text")){
+                    DrawableCompat.setTint(holder.messageText.getBackground(), ContextCompat.getColor(holder.context,R.color.colorSecondary));
+                }
+                else{
+                    Log.d("seen","inside seen");
+                    DrawableCompat.setTint(holder.chat_box_layout.getBackground(),ContextCompat.getColor(holder.context,R.color.colorSecondary));
+                }
             }
         }
 
